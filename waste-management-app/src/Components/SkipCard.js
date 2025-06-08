@@ -14,9 +14,9 @@ function SkipCard({ skip, selected, onSelect }) {
     >
       <div className="w-full h-40 bg-gray-700 rounded-lg flex items-center justify-center mb-4">
         <img
-          src={skip.image || "https://via.placeholder.com/200x120?text=Skip"}
+          src={skip.image || `https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/${skip.size}-yarder-skip.jpg`}
           alt={skip.name}
-          className="object-contain h-full"
+          className="object-cover w-full h-full"
         />
         <span className="absolute top-7 right-7 bg-blue-600 text-white text-xs px-2 py-1 rounded-full font-bold shadow">
           {skip.size} Yards
