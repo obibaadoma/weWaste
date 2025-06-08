@@ -1,40 +1,92 @@
-import React from "react";
+import React from 'react';
 
-// Make sure you have Material Icons loaded in your index.html or use @mui/icons-material if you prefer SVGs
+// Make sure you have Material Icons loaded in your index.html
+// or use @mui/icons-material if you prefer SVGs
 
 function ProgressBar() {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
   return (
-    <nav className="flex justify-center items-center gap-6 py-6 text-sm font-semibold">
-      {/* Postcode */}
-      <span className="flex items-center gap-1 text-blue-600">
-        <span className="material-icons">location_on</span> Postcode
-      </span>
-      <span className="border-b-2 border-blue-600 w-8"></span>
-      {/* Waste Type */}
-      <span className="flex items-center gap-1 text-blue-600">
-        <span className="material-icons">delete</span> Waste Type
-      </span>
-      <span className="border-b-2 border-blue-600 w-8"></span>
-      {/* Select Skip */}
-      <span className="flex items-center gap-1 text-blue-600">
-        <span className="material-icons">local_shipping</span> Select Skip
-      </span>
-      <span className="border-b-2 border-gray-700 w-8"></span>
-      {/* Permit Check */}
-      <span className="flex items-center gap-1 text-gray-400">
-        <span className="material-icons">shield</span> Permit Check
-      </span>
-      <span className="border-b-2 border-gray-700 w-8"></span>
-      {/* Choose Date */}
-      <span className="flex items-center gap-1 text-gray-400">
-        <span className="material-icons">calendar_today</span> Choose Date
-      </span>
-      <span className="border-b-2 border-gray-700 w-8"></span>
-      {/* Payment */}
-      <span className="flex items-center gap-1 text-gray-400">
-        <span className="material-icons">credit_card</span> Payment
-      </span>
-    </nav>
+    <div className="py-6 text-sm font-semibold">
+      {/* Retain original overall padding */}
+
+      {/* Toggle Button - visible only on small screens (xs), uses menu icon */}
+      <div className="sm:hidden flex justify-end items-center mb-2 px-4">
+        {/* Aligned to the right */}
+        <button
+          type="button"
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="p-2 rounded-md text-blue-500 hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-expanded={isExpanded}
+          aria-controls="progress-steps-nav"
+          aria-label={isExpanded ? "Close progress steps" : "Open progress steps"}
+        >
+          <span className="material-icons inline">{isExpanded ? "close" : "menu"}</span>
+        </button>
+      </div>
+
+      {/* Collapsible container for progress steps */}
+      <nav
+        id="progress-steps-nav"
+        className={`
+          ${
+            isExpanded
+              ? "flex flex-col items-start gap-y-3 px-4" // Mobile expanded: vertical list, left-aligned, with padding
+              : "hidden" // Mobile collapsed: hidden
+          }
+          sm:flex sm:flex-row sm:flex-wrap sm:justify-start sm:items-center
+          sm:gap-x-1 md:gap-x-2 lg:gap-x-4 sm:gap-y-4 sm:px-0 // Tablet+: horizontal, wrapped, justify-start, further adjusted gaps
+        `}
+      >
+        {/* Postcode */}
+        <span className="flex items-center gap-1 text-blue-600">
+          <span className="material-icons inline">location_on</span>
+          <span className="inline ml-1">Postcode</span>
+          {/* Text always visible with icon */}
+        </span>
+        {/* Responsive spacer - hidden on xs, visible on sm+ */}
+        <span className="border-b-2 border-blue-600 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
+
+        {/* Waste Type */}
+        <span className="flex items-center gap-1 text-blue-600">
+          <span className="material-icons inline">delete</span>
+          <span className="inline ml-1">Waste Type</span>
+          {/* Text always visible with icon */}
+        </span>
+        <span className="border-b-2 border-blue-600 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
+
+        {/* Select Skip */}
+        <span className="flex items-center gap-1 text-blue-600">
+          <span className="material-icons inline">local_shipping</span>
+          <span className="inline ml-1">Select Skip</span>
+          {/* Text always visible with icon */}
+        </span>
+        <span className="border-b-2 border-gray-700 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
+
+        {/* Permit Check */}
+        <span className="flex items-center gap-1 text-gray-400">
+          <span className="material-icons inline">shield</span>
+          <span className="inline ml-1">Permit Check</span>
+          {/* Text always visible with icon */}
+        </span>
+        <span className="border-b-2 border-gray-700 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
+
+        {/* Choose Date */}
+        <span className="flex items-center gap-1 text-gray-400">
+          <span className="material-icons inline">calendar_today</span>
+          <span className="inline ml-1">Choose Date</span>
+          {/* Text always visible with icon */}
+        </span>
+        <span className="border-b-2 border-gray-700 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
+
+        {/* Payment */}
+        <span className="flex items-center gap-1 text-gray-400">
+          <span className="material-icons inline">credit_card</span>
+          <span className="inline ml-1">Payment</span>
+          {/* Text always visible with icon */}
+        </span>
+      </nav>
+    </div>
   );
 }
 
