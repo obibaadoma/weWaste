@@ -34,15 +34,14 @@ function ProgressBar() {
               ? "flex flex-col items-start gap-y-3 px-4" // Mobile expanded: vertical list, left-aligned, with padding
               : "hidden" // Mobile collapsed: hidden
           }
-          sm:flex sm:flex-row sm:flex-wrap sm:justify-start sm:items-center
+          sm:flex sm:flex-row sm:flex-wrap sm:justify-center sm:items-center
           sm:gap-x-1 md:gap-x-2 lg:gap-x-4 sm:gap-y-4 sm:px-0 // Tablet+: horizontal, wrapped, justify-start, further adjusted gaps
         `}
       >
         {/* Postcode */}
         <span className="flex items-center gap-1 text-blue-600">
           <span className="material-icons inline">location_on</span>
-          <span className="inline ml-1">Postcode</span>
-          {/* Text always visible with icon */}
+          <span className="ml-1 sm:hidden md:inline">Postcode</span>
         </span>
         {/* Responsive spacer - hidden on xs, visible on sm+ */}
         <span className="border-b-2 border-blue-600 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
@@ -50,40 +49,35 @@ function ProgressBar() {
         {/* Waste Type */}
         <span className="flex items-center gap-1 text-blue-600">
           <span className="material-icons inline">delete</span>
-          <span className="inline ml-1">Waste Type</span>
-          {/* Text always visible with icon */}
+          <span className="ml-1 sm:hidden md:inline">Waste Type</span>
         </span>
         <span className="border-b-2 border-blue-600 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
 
         {/* Select Skip */}
         <span className="flex items-center gap-1 text-blue-600">
           <span className="material-icons inline">local_shipping</span>
-          <span className="inline ml-1">Select Skip</span>
-          {/* Text always visible with icon */}
+          <span className="ml-1 sm:hidden md:inline">Select Skip</span>
         </span>
         <span className="border-b-2 border-gray-700 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
 
         {/* Permit Check */}
         <span className="flex items-center gap-1 text-gray-400">
           <span className="material-icons inline">shield</span>
-          <span className="inline ml-1">Permit Check</span>
-          {/* Text always visible with icon */}
+          <span className="ml-1 sm:hidden md:inline">Permit Check</span>
         </span>
         <span className="border-b-2 border-gray-700 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
 
         {/* Choose Date */}
         <span className="flex items-center gap-1 text-gray-400">
           <span className="material-icons inline">calendar_today</span>
-          <span className="inline ml-1">Choose Date</span>
-          {/* Text always visible with icon */}
+          <span className="ml-1 sm:hidden md:inline">Choose Date</span>
         </span>
         <span className="border-b-2 border-gray-700 w-4 sm:w-2 md:w-4 lg:w-6 hidden sm:inline-block" />
 
         {/* Payment */}
         <span className="flex items-center gap-1 text-gray-400">
           <span className="material-icons inline">credit_card</span>
-          <span className="inline ml-1">Payment</span>
-          {/* Text always visible with icon */}
+          <span className="ml-1 sm:hidden md:inline">Payment</span>
         </span>
       </nav>
     </div>
