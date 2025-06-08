@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProgressBar from "./ProgressBar";
 import SkipCard from "./SkipCard";
-import SkipFooter from "./SkipFooter";
 import BottomBar from "./BottomBar";
 
 const API_URL =
@@ -16,14 +15,10 @@ function SkipSelector() {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log("API response:", data); // Debug: see what you get
         setSkips(data || []);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Failed to fetch skips:", err);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
   if (loading)
@@ -34,19 +29,20 @@ function SkipSelector() {
 
   const selectedSkip = skips.find((s) => s.id === selected);
 
+  // Toggle selection logic
+  const handleSelect = (id) => {
+    setSelected(selected === id ? null : id);
+  };
+
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col">
       <ProgressBar />
-
-      {/* Title */}
       <div className="text-center mb-2">
         <h1 className="text-3xl font-bold text-white">Choose Your Skip Size</h1>
         <p className="text-gray-400 mt-2">
           Select the skip size that best suits your needs
         </p>
       </div>
-
-      {/* Skip Cards */}
       <div className="flex-1 flex flex-col">
         <div className="grid gap-6 px-4 py-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 w-full max-w-6xl mx-auto">
           {skips.map((skip) => (
@@ -54,14 +50,11 @@ function SkipSelector() {
               key={skip.id}
               skip={skip}
               selected={selected}
-              onSelect={setSelected}
+              onSelect={handleSelect}
             />
           ))}
         </div>
       </div>
-
-      <SkipFooter />
-
       <BottomBar
         selectedSkip={selectedSkip}
         onBack={() => setSelected(null)}

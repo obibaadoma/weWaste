@@ -18,11 +18,12 @@ function SkipCard({ skip, selected, onSelect }) {
           alt={skip.name}
           className="object-contain h-full"
         />
-        <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-bold shadow">
+        <span className="absolute top-7 right-7 bg-blue-600 text-white text-xs px-2 py-1 rounded-full font-bold shadow">
           {skip.size} Yards
         </span>
       </div>
       <h2 className="text-xl font-bold text-white mb-1">{skip.name}</h2>
+      
       <p className="text-gray-400 text-sm mb-2">14 day hire period</p>
       <span className="text-blue-400 font-bold text-lg mb-4">
         £{skip.price}{" "}
@@ -35,7 +36,7 @@ function SkipCard({ skip, selected, onSelect }) {
             : "bg-gray-700 text-gray-300 hover:bg-blue-700 hover:text-white"
         }`}
       >
-        {selected === skip.id ? "Selected" : "Choose"}
+        {selected === skip.id ? "Selected" : "Select this skip -->"}
       </button>
     </div>
   );
