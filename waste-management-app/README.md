@@ -1,15 +1,22 @@
-# ♻️ Waste Management App
+# ♻️ Redesign Waste Management App
 
-this is a responsive and user-friendly React application that allows users to select and order the appropriate skip size for their waste disposal needs. Designed with clean UI/UX using Tailwind CSS and focused on clarity, accessibility, and mobile-friendliness.
+## 🧠 Overview
 
-## 🚀 Project Features
+This project is a redesign of the "Choose Your Skip Size" page from [WeWantWaste.co.uk](https://wewantwaste.co.uk).  
+The goal was to provide a cleaner, responsive, and user-friendly UI/UX while preserving and improving existing functionalities.It is focused on clarity, accessibility, and mobile-friendliness.
 
-- 📦 **Skip Size Selector** – Choose from various skip sizes with clear pricing and descriptions.
-- 🎨 **Modern UI/UX** – Styled using Tailwind CSS with a responsive grid card layout.
-- 📱 **Mobile Friendly** – Designed to work smoothly on all screen sizes.
-- 🔄 **Reusable Components** – Built with modular React components for easy scaling.
-- 📡 **API-Ready** – Placeholder for integrating external skip data APIs.
+## 🔗 Live Preview (CodeSandbox)
 
+👉 [Click here to test the redesigned page](https://ss669x-3000.csb.app/)
+
+
+## ✅ Project Requirements
+
+- ✅ Redesign the "Choose Your Skip Size" page with a completely different look
+- ✅ Use the API data from [https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft](https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft)
+- ✅ Maintain original functionality (selecting skips, responsive layout)
+- ✅ Make the UI responsive (mobile + desktop)
+- ✅ Deliver clean, maintainable React code
 ---
 
 ## 📂 Project Structure
@@ -55,9 +62,65 @@ waste-management-app/
 
 ## 🛠️ Tech Stack
 
-- **React** – JavaScript library for building user interfaces
+- **React** – Use React to build the user interface
+- **HTML** – Markup language for structuring and presenting content on the web
+- **CSS** – Cascading Style Sheets for styling web pages
+- **JavaScript** – Programming language for adding interactivity to web pages
+- **Git** – Version control system for tracking changes in source code during software development
 - **Tailwind CSS** – Utility-first CSS framework for styling
 - **Vite / Create React App** – Fast React build tool (CRA used in this case)
+
+
+
+---
+
+## 🚀 My Approach
+
+1. **API Integration:**
+   - Fetched data from the API endpoint
+   - Handled loading and error states gracefully
+
+2. **Component-Based Design:**
+   - `SkipCard`: Displays a single skip with name, size, price, etc.
+   - `SkipList`: Maps through the skip options and renders them responsively
+   - `SkipSelector`: Handles skip selection and state management
+   - `BottomBar`: Manages the bottom navigation bar
+   - `ProgressBar`: Tracks the user's progress through the app
+
+3. **UI/UX Improvements:**
+   - Introduced a clean, modern card layout
+   - Improved spacing, typography, and accessibility
+   - Included mobile-first responsive breakpoints
+   - Added smooth transitions and animations
+   - Implemented a responsive bottom navigation bar
+   - Added a progress bar to track user progress
+   - Added a skip selector to allow users to select a skip size
+   - Added a skip list to display the available skip options
+
+4. **Responsiveness:**
+   - Used Tailwind’s responsive utilities (`sm:`, `md:`, `lg:`) to ensure proper layout on all screen sizes
+
+
+---
+
+## 📷 Screenshots
+
+> _Add screenshots of the new UI on desktop and mobile (optional but nice)._
+
+---
+
+## 📦 How to Run Locally
+
+```bash
+# Clone the repo
+git clone https://github.com/your-username/waste-management-app.git
+cd waste-management-app
+
+# Install dependencies
+npm install
+
+# Run the app
+npm run dev   # or npm start
 
 ---
 
@@ -75,7 +138,7 @@ cd waste-management-app
 
 ✅ Add cart and booking functionality
 
-✅ Implement great work across different browsers
+✅ Implement great work across different 
 
 🌍 Add location-based pricing
 
