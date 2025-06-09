@@ -15,6 +15,22 @@ function SkipSelector() {
   const [formSizeMax, setFormSizeMax] = useState('');
   const [formPriceMin, setFormPriceMin] = useState('');
   const [formPriceMax, setFormPriceMax] = useState('');
+  const [appliedFilter, setAppliedFilter] = useState({ mode: 'all' });
+
+  // Update filter when filter mode changes
+  useEffect(() => {
+    if (filterMode === 'all') {
+      setAppliedFilter({ mode: 'all' });
+    } else {
+      setAppliedFilter({
+        mode: 'custom',
+        sizeMin: formSizeMin,
+        sizeMax: formSizeMax,
+        priceMin: formPriceMin,
+        priceMax: formPriceMax,
+      });
+    }
+  }, [filterMode, formSizeMin, formSizeMax, formPriceMin, formPriceMax]);
 
   useEffect(() => {
     fetch(API_URL)
@@ -26,19 +42,13 @@ function SkipSelector() {
       .catch(() => setLoading(false));
   }, []);
 
-  // Initialize default values
-  const defaultMinSize = 0;
-  const defaultMaxSize = 100;
-  const defaultMinPrice = 0;
-  const defaultMaxPrice = 1000;
-
   // Get min/max for size and price from skips
   const sizeValues = skips.map(s => Number(s.size)).filter(Boolean);
   const priceValues = skips.map(s => Number(s.price)).filter(Boolean);
-  const minSize = sizeValues.length ? Math.min(...sizeValues) : defaultMinSize;
-  const maxSize = sizeValues.length ? Math.max(...sizeValues) : defaultMaxSize;
-  const minPrice = priceValues.length ? Math.min(...priceValues) : defaultMinPrice;
-  const maxPrice = priceValues.length ? Math.max(...priceValues) : defaultMaxPrice;
+  const minSize = sizeValues.length ? Math.min(...sizeValues) : 0;
+  const maxSize = sizeValues.length ? Math.max(...sizeValues) : 100;
+  const minPrice = priceValues.length ? Math.min(...priceValues) : 0;
+  const maxPrice = priceValues.length ? Math.max(...priceValues) : 1000;
 
   // Set default form values on skips load
   useEffect(() => {
@@ -63,24 +73,16 @@ function SkipSelector() {
     setSelected(selected === id ? null : id);
   };
 
-  // Filter skips based on form values when in custom mode
+  // Filter skips by applied filter
   let filteredSkips = skips;
-  if (filterMode === 'custom') {
+  if (appliedFilter.mode === 'custom') {
     filteredSkips = skips.filter((s) => {
-      const skipSize = Number(s.size);
-      const skipPrice = Number(s.price);
-      
-      // Get current form values with fallbacks
-      const sizeMin = Number(formSizeMin) || minSize ;
-      const sizeMax = Number(formSizeMax) || maxSize ;
-      const priceMin = Number(formPriceMin) || minPrice ;
-      const priceMax = Number(formPriceMax) || maxPrice ;
-      
-      // Check if skip is within the selected ranges
-      const sizeInRange = skipSize >= sizeMin && skipSize <= sizeMax;
-      const priceInRange = skipPrice >= priceMin && skipPrice <= priceMax;
-      
-      return sizeInRange && priceInRange;
+      const size = Number(s.size);
+      const price = Number(s.price);
+      return (
+        (size >= Number(appliedFilter.sizeMin) && size <= Number(appliedFilter.sizeMax)) &&
+        (price >= Number(appliedFilter.priceMin) && price <= Number(appliedFilter.priceMax))
+      );
     });
   }
 
@@ -88,10 +90,16 @@ function SkipSelector() {
   const handleFilterSubmit = (e) => {
     e.preventDefault();
     if (filterMode === 'all') {
-      // Reset filter mode to all
-      return;
+      setAppliedFilter({ mode: 'all' });
+    } else {
+      setAppliedFilter({
+        mode: 'custom',
+        sizeMin: formSizeMin,
+        sizeMax: formSizeMax,
+        priceMin: formPriceMin,
+        priceMax: formPriceMax,
+      });
     }
-    // Filter is applied directly from form values
   };
 
   return (
@@ -142,7 +150,7 @@ function SkipSelector() {
                 value={formSizeMin}
                 onChange={e => setFormSizeMin(e.target.value)}
                 className="w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
-                disabled={filterMode === 'all'}
+                disabled={filterMode !== 'custom'}
               />
               <span className="text-gray-400">to</span>
               <input
@@ -153,7 +161,7 @@ function SkipSelector() {
                 value={formSizeMax}
                 onChange={e => setFormSizeMax(e.target.value)}
                 className="w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
-                disabled={filterMode === 'all'}
+                disabled={filterMode !== 'custom'}
               />
             </div>
           </div>
@@ -168,7 +176,7 @@ function SkipSelector() {
                 value={formPriceMin}
                 onChange={e => setFormPriceMin(e.target.value)}
                 className="w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
-                disabled={filterMode === 'all'}
+                disabled={filterMode !== 'custom'}
               />
               <span className="text-gray-400">to</span>
               <input
@@ -179,7 +187,7 @@ function SkipSelector() {
                 value={formPriceMax}
                 onChange={e => setFormPriceMax(e.target.value)}
                 className="w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
-                disabled={filterMode === 'all'}
+                disabled={filterMode !== 'custom'}
               />
             </div>
           </div>
@@ -199,18 +207,13 @@ function SkipSelector() {
             <SkipCard
               key={skip.id}
               skip={skip}
-              selected={selected}
+              selected={selected === skip.id}
               onSelect={handleSelect}
-              className='bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300'
             />
           ))}
         </div>
       </div>
-      <BottomBar
-        selectedSkip={selectedSkip}
-        onBack={() => setSelected(null)}
-        onContinue={() => alert('Continue clicked!')} 
-      />
+      <BottomBar selectedSkip={selectedSkip} />
     </div>
   );
 }
