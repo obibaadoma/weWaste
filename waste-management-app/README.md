@@ -75,6 +75,8 @@ cd waste-management-app
 
 ✅ Add cart and booking functionality
 
+✅ Implement Filter button to sort specific skips.
+
 🌍 Add location-based pricing
 
 🔒 User authentication (optional)
