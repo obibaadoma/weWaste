@@ -1,4 +1,4 @@
-# ♻️ Redisign Waste Management App
+# ♻️ Redesign Waste Management App
 
 ## 🧠 Overview
 
@@ -99,7 +99,7 @@ waste-management-app/
 
 4. **Responsiveness:**
    - Used Tailwind’s responsive utilities (`sm:`, `md:`, `lg:`) to ensure proper layout on all screen sizes
-   
+
 
 ---
 
