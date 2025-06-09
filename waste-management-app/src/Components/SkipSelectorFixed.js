@@ -44,7 +44,7 @@ function SkipSelector() {
 
   // Get min/max for size and price from skips
   const sizeValues = skips.map(s => Number(s.size)).filter(Boolean);
-  const priceValues = skips.map(s => Number(s.price)).filter(Boolean);
+  const priceValues = skips.map(s => Number(s.price_before_vat)).filter(Boolean);
   const minSize = sizeValues.length ? Math.min(...sizeValues) : 0;
   const maxSize = sizeValues.length ? Math.max(...sizeValues) : 100;
   const minPrice = priceValues.length ? Math.min(...priceValues) : 0;
@@ -78,10 +78,12 @@ function SkipSelector() {
   if (appliedFilter.mode === 'custom') {
     filteredSkips = skips.filter((s) => {
       const size = Number(s.size);
-      const price = Number(s.price);
+      const price = Number(s.price_before_vat);
       return (
-        (size >= Number(appliedFilter.sizeMin) && size <= Number(appliedFilter.sizeMax)) &&
-        (price >= Number(appliedFilter.priceMin) && price <= Number(appliedFilter.priceMax))
+        (isNaN(Number(appliedFilter.sizeMin)) || size >= Number(appliedFilter.sizeMin)) &&
+        (isNaN(Number(appliedFilter.sizeMax)) || size <= Number(appliedFilter.sizeMax)) &&
+        (isNaN(Number(appliedFilter.priceMin)) || price >= Number(appliedFilter.priceMin)) &&
+        (isNaN(Number(appliedFilter.priceMax)) || price <= Number(appliedFilter.priceMax))
       );
     });
   }
