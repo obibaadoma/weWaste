@@ -104,89 +104,91 @@ function SkipSelector() {
         </p>
         {/* Filter Form: Filter by skip size and price */}
         <form
-          className="flex flex-wrap justify-center items-end gap-4 mt-4 mb-2 bg-gray-800/80 p-4 rounded-xl shadow"
-          onSubmit={handleFilterSubmit}
+          className='flex flex-wrap justify-center items-end gap-4 mt-4 mb-2 bg-gray-800/80 p-4 rounded-xl shadow'
+          onSubmit={(e) => handleFilterSubmit(e)}
         >
-          <div className="flex flex-row flex-wrap items-center gap-4 w-full sm:w-auto justify-center sm:justify-start mb-2 sm:mb-0">
-            <label className="flex items-center gap-2 text-gray-300 cursor-pointer font-semibold">
+          <div className='flex flex-row flex-wrap items-center gap-4 w-full sm:w-auto justify-center sm:justify-start mb-2 sm:mb-0'>
+            <label className='flex items-center gap-2 text-gray-300 cursor-pointer font-semibold' htmlFor='filter-all'>
               <input
-                type="radio"
-                name="filter-mode"
-                value="all"
+                id='filter-all'
+                type='radio'
+                name='filter-mode'
+                value='all'
                 checked={filterMode === 'all'}
                 onChange={() => setFilterMode('all')}
-                className="accent-blue-500"
+                className='accent-blue-500'
               />
               All
             </label>
-            <label className="flex items-center gap-2 text-gray-300 cursor-pointer font-semibold">
+            <label className='flex items-center gap-2 text-gray-300 cursor-pointer font-semibold' htmlFor='filter-custom'>
               <input
-                type="radio"
-                name="filter-mode"
-                value="custom"
+                id='filter-custom'
+                type='radio'
+                name='filter-mode'
+                value='custom'
                 checked={filterMode === 'custom'}
                 onChange={() => setFilterMode('custom')}
-                className="accent-blue-500"
+                className='accent-blue-500'
               />
               Filter by size/price
             </label>
           </div>
-          <div className="flex flex-col items-center min-w-[160px]">
-            <label className="text-gray-300 mb-1 font-semibold" htmlFor="size-min">Skip Size (Yards)</label>
-            <div className="flex items-center gap-2 w-full">
+          <div className='flex flex-col items-center min-w-[160px]'>
+            <label className='text-gray-300 mb-1 font-semibold' htmlFor='size-min'>Skip Size (Yards)</label>
+            <div className='flex items-center gap-2 w-full'>
               <input
-                id="size-min"
-                type="number"
+                id='size-min'
+                type='number'
                 min={minSize}
                 max={maxSize}
                 value={formSizeMin}
-                onChange={e => setFormSizeMin(e.target.value)}
-                className="w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
+                onChange={(e) => setFormSizeMin(e.target.value)}
+                className='w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center'
                 disabled={filterMode === 'all'}
               />
-              <span className="text-gray-400">to</span>
+              <span className='text-gray-400'>to</span>
               <input
-                id="size-max"
-                type="number"
+                id='size-max'
+                type='number'
                 min={minSize}
                 max={maxSize}
                 value={formSizeMax}
-                onChange={e => setFormSizeMax(e.target.value)}
-                className="w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
+                onChange={(e) => setFormSizeMax(e.target.value)}
+                className='w-16 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center'
                 disabled={filterMode === 'all'}
               />
             </div>
           </div>
-          <div className="flex flex-col items-center min-w-[180px]">
-            <label className="text-gray-300 mb-1 font-semibold" htmlFor="price-min">Price (£)</label>
-            <div className="flex items-center gap-2 w-full">
+          <div className='flex flex-col items-center min-w-[180px]'>
+            <label className='text-gray-300 mb-1 font-semibold' htmlFor='price-min'>Price (£)</label>
+            <div className='flex items-center gap-2 w-full'>
               <input
-                id="price-min"
-                type="number"
+                id='price-min'
+                type='number'
                 min={minPrice}
                 max={maxPrice}
                 value={formPriceMin}
-                onChange={e => setFormPriceMin(e.target.value)}
-                className="w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
+                onChange={(e) => setFormPriceMin(e.target.value)}
+                className='w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center'
                 disabled={filterMode === 'all'}
               />
-              <span className="text-gray-400">to</span>
+              <span className='text-gray-400'>to</span>
               <input
-                id="price-max"
-                type="number"
+                id='price-max'
+                type='number'
                 min={minPrice}
                 max={maxPrice}
                 value={formPriceMax}
-                onChange={e => setFormPriceMax(e.target.value)}
-                className="w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center"
+                onChange={(e) => setFormPriceMax(e.target.value)}
+                className='w-20 px-2 py-1 rounded bg-gray-700 text-white border border-gray-600 text-center'
                 disabled={filterMode === 'all'}
               />
             </div>
           </div>
-          <div className="flex items-end">
+          <div className='flex items-end'>
             <button
-              type="submit"
-              className="px-6 py-2 rounded-lg bg-blue-600 text-white font-bold shadow hover:bg-blue-700 transition disabled:opacity-60 disabled:cursor-not-allowed w-full sm:w-auto"
+              type='submit'
+              className='px-6 py-2 rounded-lg bg-blue-600 text-white font-bold shadow hover:bg-blue-700 transition disabled:opacity-60 disabled:cursor-not-allowed w-full sm:w-auto'
             >
               Filter
             </button>
